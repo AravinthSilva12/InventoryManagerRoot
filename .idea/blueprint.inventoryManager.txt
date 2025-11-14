@@ -1,0 +1,66 @@
+com.yourapp.inventorymanager/
+│
+├── main/
+│   ├── MainActivity.kt          # App entry point
+│   ├── SplashScreen.kt          # Initial splash
+│   ├── DashboardActivity.kt     # Dashboard with tabs/icons
+│   └── EventHandler.kt          # Handles UI events and navigation
+│
+├── module/
+│   ├── stock/
+│   │   ├── StockItem.kt         # id, name, quantity, lowStockThreshold, lastUpdated
+│   │   └── StockHistory.kt      # id, stockItemId, changeQuantity, type, timestamp
+│   │
+│   └── billing/
+│       ├── Bill.kt              # id, list of BillItems, totalAmount, timestamp
+│       ├── BillItem.kt          # stockItemId, quantity, pricePerUnit
+│       └── CashFlow.kt          # id, type (income/expense), amount, timestamp
+│
+├── service/
+│   ├── stock/
+│   │   ├── StockService.kt      # add/update stock, reduce stock, get low stock, store stock history
+│   │   └── StockAlertService.kt # optional: separate for notifications / low stock alerts
+│   │
+│   └── billing/
+│       ├── BillingService.kt    # create bill, generate daily summary, update cash flow
+│       └── CashFlowService.kt   # calculate current balance, manage cash flow
+│
+└── util/
+    ├── DateTimeUtil.kt          # format timestamps
+    ├── ValidationUtil.kt        # check quantity, price validity
+    ├── LoggerUtil.kt            # logging/debugging
+    ├── SortingUtil.kt           # generic sorting functions
+    ├── FilteringUtil.kt         # generic filtering
+    ├── SearchUtil.kt            # searching items
+    ├── PrintUtil.kt             # print bills / reports
+    └── ScannerUtil.kt           # QR/barcode scanner helper
+
+---
+ **Step 1: Create your Stock module classes**
+
+ **Goal:** define the **data structure** for Stock.
+
+ **Instruction:**
+
+1. Go to your `module.stock` package.
+
+2. Create a class called `StockItem` with these properties:
+
+   * `id` → unique identifier for the stock item
+   * `name` → name of the product
+   * `quantity` → current quantity in stock
+   * `lowStockThreshold` → minimum quantity before alert
+   * `lastUpdated` → timestamp of last update
+
+3. Create another class called `StockHistory` with these properties:
+
+   * `id` → unique identifier for the history record
+   * `stockItemId` → the stock item this change belongs to
+   * `changeQuantity` → how much stock changed (+/-)
+   * `type` → reason: “added”, “sold”, “returned”, etc.
+   * `timestamp` → when this change happened
+
+✅ **Goal of this step:** you now have **data objects ready**, which the service will act upon.
+
+---
+
