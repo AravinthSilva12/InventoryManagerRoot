@@ -1,4 +1,4 @@
-package model;
+package com.aravinth.inventorymanager.model;
 
 public class StockHistory {
     // variables & properties :

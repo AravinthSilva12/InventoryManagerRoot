@@ -1,4 +1,4 @@
-package main;
+package com.aravinth.inventorymanager.main;
 
 public class InventoryManagerMain {
     public static void main(String[] args){

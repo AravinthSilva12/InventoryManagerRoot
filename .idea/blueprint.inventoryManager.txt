@@ -64,3 +64,81 @@ com.yourapp.inventorymanager/
 
 ---
 
+Yes — those **10 steps are finalised** as *Day 2 tasks*. Good call keeping me as your teacher, not your coder. I’ll teach, coach, and keep things small so you can do the work.
+
+Below is a clean, prioritized Day-2 plan you can actually *execute* right now — no code from me unless you ask. I broke each big step into tiny chunks so you can finish one bite at a time and get fast feedback.
+
+# Day 2 — Finalised & actionable checklist (do in this order)
+
+1. **Pick persistence mode (decide now)**
+
+   * Option A: **In-memory** (recommended for Day 2 prototyping).
+   * Option B: **Room/SQLite** (if you want persistent data today).
+   * Decision: choose A for speed unless you specifically want DB practice.
+
+2. **Create `StockRepository` (interface + minimal implementation)**
+
+   * Create the interface with the methods: `getAll()`, `getById(id)`, `insert(item)`, `update(item)`, `delete(id)`, `getHistoryForItem(id)`, `insertHistory(history)`.
+   * Implement it in-memory (Map + auto-increment id + List for history).
+   * Quick check: insert an item and retrieve it.
+
+3. **Create `StockService` (business rules only)**
+
+   * Implement `addItem`, `updateItem` (set `lastUpdated`), and `adjustQuantity(itemId, delta, reason)`.
+   * Enforce: no negative stock, history entry only on success, update `lastUpdated`.
+   * Quick check: restock and sale adjustments reflect correctly.
+
+4. **Add `StockHistory` storage and simple queries**
+
+   * Store histories in a list; provide `getHistoryForItem`.
+   * Quick check: every `adjustQuantity` produces one history entry.
+
+5. **Manual test checklist (run these now)**
+
+   * Insert item with qty 10.
+   * `adjustQuantity(id, -3, "sale")` → qty should be 7.
+   * `adjustQuantity(id, -20, "sale")` → should reject; qty stays 7.
+   * `adjustQuantity(id, +5, "restock")` → qty 12, history entries = 2.
+   * Confirm `lastUpdated` changed on successful updates.
+
+6. **Add a tiny debug UI hook (optional for quick visibility)**
+
+   * A single form: itemId, delta, reason, Apply button → calls `adjustQuantity` and shows a Toast or Log message.
+   * Or skip UI and run unit tests / temporary console logs.
+
+7. **Add `getLowStock()` helper**
+
+   * Return items where `quantity <= lowStockThreshold`.
+   * Quick check: mark or list low-stock items.
+
+8. **Commit & branch habit**
+
+   * Commit after each small checkpoint. Example messages:
+
+     * `day2: add in-memory StockRepository`
+     * `day2: add StockService adjustQuantity`
+     * `day2: add stock history storage`
+   * Use branch `feature/day2-stock-service`.
+
+9. **Edge cases & notes (learn now)**
+
+   * Don’t create history for failed operations.
+   * Keep objects immutable where possible or be careful with shared references.
+   * Later you’ll need transactions if you switch to DB to avoid race conditions.
+
+10. **Stretch (only if comfortable)**
+
+    * Unit test for rejection on insufficient stock.
+    * CSV export of items.
+    * Simple “low stock” notification flag.
+
+---
+
+# How I’ll mentor while you work
+
+* I will *not* write the code unless you ask.
+* If you get stuck, paste the exact code snippet or Logcat/stack trace — I’ll point *exactly* what’s wrong and how to fix it.
+* If you want, I’ll walk you step-by-step through implementing **one** method (e.g., `adjustQuantity`) with pseudocode and checks — still no finished code unless you request it.
+
+Alright — you’ve got a focused Day-2 list. Start with **Step 1 (pick persistence A or B)** and then **Step 2 (create the repository interface + in-memory implementation)**. When you finish either (or hit any problem), tell me what happened and I’ll teach you the next tiny step or debug it with you.
+
