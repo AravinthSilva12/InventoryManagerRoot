@@ -1,0 +1,23 @@
+package com.aravinth.inventorymanager.repository;
+
+public interface StockItemRepository {
+      List<StockItem> findAll();
+      StockItem findById(int Id);
+      void save(StockItem item);
+      void update(StockItem item);
+      StockItem delete(int id);
+      List<StockItem> findLowStock();
+  
+}
+
+----------------------------------------
+
+package com.aravinth.inventorymanager.repository;
+import com.aravinth.inventorymanager.model.StockHistory;
+import java.util.List;
+public interface StockHistoryRepository {
+            List<StockHistory> findAll();
+            List<StockHistory> findById(int Id);
+            int save(StockHistory history);
+            void delete(int id);   
+         }
