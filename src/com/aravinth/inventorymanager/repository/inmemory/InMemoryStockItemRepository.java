@@ -29,17 +29,30 @@ public class InMemoryStockItemRepository implements StockItemRepository {
 
     @Override
     public void update(StockItem item){
-
+         int id = item.getId();
+         if(id == 0){
+             save(item);
+             return;
+         }
+         if(items.containsKey(id)){
+           items.put(id, item);
+         }
     }
 
     @Override
     public void delete(int id){
-
+       items.remove(id);
     }
 
     @Override
     public List<StockItem> findLowStock(){
-
+        List<StockItem> result = new ArrayList<>();
+        for(StockItem item : items.values()){
+            if(item.isLowStock()){
+                result.add(item);
+            }
+        }
+        return result;
     }
 }
 
