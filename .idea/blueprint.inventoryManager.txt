@@ -1,4 +1,4 @@
-com.yourapp.inventorymanager/
+ com.yourapp.inventorymanager/
 │
 ├── main/
 │   ├── MainActivity.kt          # App entry point
@@ -141,4 +141,33 @@ Below is a clean, prioritized Day-2 plan you can actually *execute* right now �
 * If you want, I’ll walk you step-by-step through implementing **one** method (e.g., `adjustQuantity`) with pseudocode and checks — still no finished code unless you request it.
 
 Alright — you’ve got a focused Day-2 list. Start with **Step 1 (pick persistence A or B)** and then **Step 2 (create the repository interface + in-memory implementation)**. When you finish either (or hit any problem), tell me what happened and I’ll teach you the next tiny step or debug it with you.
+===============================================================================
+
+**### For tomorrow (so you don’t lose the thread)**
+
+**When you come back, start with these steps:**
+
+**1. \*\*Fix `StockItem` model\*\***
+     **\* Add:**
+     **\* `private int id;`**
+     **\* `getId()` / `setId(int id)`**
+     **\* `getQuantity()` / `setQuantity(...)`**
+     **\* `getLowStockThreshold()` / `setLowStockThreshold(...)`**
+     **\* Then your `save` method will compile.**
+
+**2. \*\*Finish these in `InMemoryStockItemRepository`:\*\***
+     **\* `update(StockItem item)`**
+     **\* `delete(int id)`**
+     **\* `findLowStock()`**
+
+**3. After that, paste:**
+     **\* `StockItem` class**
+     **\* And `InMemoryStockItemRepository` (full)**
+
+**I’ll do a clean code review and we’ll move to `StockHistory` next.**
+**Now shut the IDE, drink water, and go rest. You’re not wasting time—you’re actually building a real architecture from scratch. 🧠⚙️**
+**Ping me tomorrow like: \*\*"continue java project"\*\*, and we’ll pick this exact thread back up.**
+
+
+
 
