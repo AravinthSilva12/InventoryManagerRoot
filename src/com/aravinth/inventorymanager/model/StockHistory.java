@@ -9,6 +9,11 @@ public class StockHistory {
     private int quantityChange;
     private String note;
 
+
+    // no-argument constructor
+    public StockHistory() {
+        // default constructor for frameworks and demos
+    }
     // constructor
     public StockHistory(int id, int stockItemId, String type, long timestamp, int quantityChange, String note){
         this.id = id;

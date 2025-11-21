@@ -7,4 +7,5 @@ public interface StockHistoryRepository {
     List<StockHistory> findByItemId(int itemId);
     void save(StockHistory history);
     void delete(int id);
+    void update(StockHistory itemId);
 }
