@@ -20,4 +20,96 @@ public interface StockHistoryRepository {
             List<StockHistory> findById(int Id);
             int save(StockHistory history);
             void delete(int id);   
-         }
+         }==========
+=============================
+
+D:\Programming-repo\Java-17\bin\java.exe "-javaagent:D:\Programming-repo\Java-IDE-IntelliJ\IntelliJ IDEA Community Edition 2025.2.3\lib\idea_rt.jar=57440" -Dfile.encoding=UTF-8 -classpath D:\Programming-repo\JavaProjectsRoot\InventoryManagerRoot\InventoryManagerRoot\out\production\InventoryManagerRoot com.aravinth.inventorymanager.demo.InventoryDemo
+All: [StockItem {Id = 1, Name : Pen, Quantity = 5, LowStockThreshold = 10, Last updated : 1763566273865 }, StockItem {Id = 2, Name : Notebook, Quantity = 20, LowStockThreshold = 5, Last updated : 1763566273865 }]
+Low stock: [StockItem {Id = 1, Name : Pen, Quantity = 5, LowStockThreshold = 10, Last updated : 1763566273865 }]
+After update: [StockItem {Id = 1, Name : Pen, Quantity = 15, LowStockThreshold = 10, Last updated : 1763566273865 }, StockItem {Id = 2, Name : Notebook, Quantity = 20, LowStockThreshold = 5, Last updated : 1763566273865 }]
+After delete: [StockItem {Id = 1, Name : Pen, Quantity = 15, LowStockThreshold = 10, Last updated : 1763566273865 }]
+
+Process finished with exit code 0
+================================
+
+package com.aravinth.inventorymanager.repository.inmemory;
+
+import com.aravinth.inventorymanager.model.StockHistory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class InMemoryStockHistoryRepositoryTest {
+
+    private InMemoryStockHistoryRepository repo;
+
+    @BeforeEach
+    void setUp() {
+        repo = new InMemoryStockHistoryRepository();
+    }
+
+    @Test
+    void save_assignsIdAndStores() {
+        // create history with no id (0 means "new")
+        StockHistory h = new StockHistory();
+        h.setStockItemId(10);
+        // other fields optional: quantity, type, timestamp etc.
+
+        repo.save(h);
+
+        // id must be assigned (> 0) after save
+        assertTrue(h.getId() > 0, "Expected id assigned after save");
+
+        // findById should return same object (or an equivalent stored object)
+        StockHistory stored = repo.findById(h.getId());
+        assertNotNull(stored, "Saved history should be retrievable by id");
+        assertEquals(10, stored.getStockItemId());
+    }
+
+    @Test
+    void findByItemId_returnsAllForThatItem() {
+        // create and save three histories:
+        StockHistory h1 = new StockHistory(); h1.setStockItemId(5);
+        StockHistory h2 = new StockHistory(); h2.setStockItemId(5);
+        StockHistory h3 = new StockHistory(); h3.setStockItemId(7);
+
+        repo.save(h1); // assigns id 1
+        repo.save(h2); // assigns id 2
+        repo.save(h3); // assigns id 3
+
+        List<StockHistory> listFor5 = repo.findByItemId(5);
+        // basic checks
+        assertNotNull(listFor5);
+        assertEquals(2, listFor5.size(), "Should return two entries for itemId=5");
+
+        // Sort by id to make order deterministic for the assertion
+        List<Integer> ids = listFor5.stream()
+                .sorted(Comparator.comparingInt(StockHistory::getId))
+                .map(StockHistory::getId)
+                .collect(Collectors.toList());
+
+        assertEquals(2, ids.size());
+        assertTrue(ids.get(0) < ids.get(1), "IDs should be increasing after save");
+        // optionally, check they are the same objects (if your repo returns same instances)
+        assertTrue(ids.contains(h1.getId()));
+        assertTrue(ids.contains(h2.getId()));
+    }
+
+    @Test
+    void delete_removesEntry() {
+        StockHistory h = new StockHistory();
+        h.setStockItemId(99);
+        repo.save(h);
+        int id = h.getId();
+        assertNotNull(repo.findById(id));
+
+        repo.delete(id);
+        assertNull(repo.findById(id), "Entry should be null after delete");
+    }
+}
+
