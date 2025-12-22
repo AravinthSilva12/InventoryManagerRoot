@@ -8,7 +8,8 @@ public class StockHistory {
     private long timestamp;
     private int quantityChange;
     private String note;
-
+    private StockItem item;
+    private String action;
 
     // no-argument constructor
     public StockHistory() {
@@ -22,6 +23,11 @@ public class StockHistory {
         this.timestamp = timestamp;
         this.quantityChange = quantityChange;
         this.note = note;
+    }
+    // constructor
+    public StockHistory(StockItem item, String action){
+        this.item = item;
+        this.action = action;
     }
 
     // id

@@ -20,11 +20,12 @@ public class InMemoryStockItemRepository implements StockItemRepository {
     }
 
     @Override
-    public void save(StockItem item){
+    public StockItem save(StockItem item){
         if(item.getId() == 0){
             item.setId(nextId++);
         }
         items.put(item.getId(), item);
+        return item;
     }
 
     @Override
