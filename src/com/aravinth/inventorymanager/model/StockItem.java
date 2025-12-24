@@ -4,14 +4,16 @@ public class StockItem {
     // variables & properties :
     private int id;
     private String name;
+    public double price;
     private int quantity;
     private int lowStockThreshold;
     private long lastUpdated;
     // -------------------------
     // constructor :
-    public StockItem(int id, String name, int quantity, int lowStockThreshold, long lastUpdated){
+    public StockItem(int id, String name, double price, int quantity, int lowStockThreshold, long lastUpdated){
         this.id = id;
         this.name = name;
+        this.price = price;
         this.quantity = quantity;
         this.lowStockThreshold = lowStockThreshold;
         this.lastUpdated = lastUpdated;
@@ -24,6 +26,15 @@ public class StockItem {
 
     public void setId(int id){
       this.id = id;
+    }
+    // -------------------------
+    // name & price methods :
+    public String getName(){
+        return name;
+    }
+
+    public double getPrice(){
+        return price;
     }
     // -------------------------
     // quantity methods :

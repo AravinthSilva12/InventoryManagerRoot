@@ -55,5 +55,10 @@ public class InMemoryStockItemRepository implements StockItemRepository {
         }
         return result;
     }
+
+    @Override
+    public StockItem delete(int id, String deleted) {
+        return null;
+    }
 }
 

@@ -8,4 +8,6 @@ public interface StockItemRepository {
     void update(StockItem item);
     void delete(int id);
     List<StockItem> findLowStock();
+    StockItem delete(int id, String deleted);
+
 }
