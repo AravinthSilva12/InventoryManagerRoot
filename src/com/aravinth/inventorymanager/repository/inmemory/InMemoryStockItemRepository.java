@@ -44,21 +44,5 @@ public class InMemoryStockItemRepository implements StockItemRepository {
     public void delete(int id){
        items.remove(id);
     }
-
-    @Override
-    public List<StockItem> findLowStock(){
-        List<StockItem> result = new ArrayList<>();
-        for(StockItem item : items.values()){
-            if(item.isLowStock()){
-                result.add(item);
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public StockItem delete(int id, String deleted) {
-        return null;
-    }
 }
 

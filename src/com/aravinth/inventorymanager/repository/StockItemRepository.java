@@ -7,7 +7,4 @@ public interface StockItemRepository {
     StockItem save(StockItem item);
     void update(StockItem item);
     void delete(int id);
-    List<StockItem> findLowStock();
-    StockItem delete(int id, String deleted);
-
 }

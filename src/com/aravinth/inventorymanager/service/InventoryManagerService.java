@@ -3,13 +3,8 @@ import com.aravinth.inventorymanager.model.StockItem;
 import com.aravinth.inventorymanager.model.StockHistory;
 import com.aravinth.inventorymanager.repository.StockHistoryRepository;
 import com.aravinth.inventorymanager.repository.StockItemRepository;
-import com.aravinth.inventorymanager.repository.inmemory.InMemoryStockItemRepository;
-
-import java.util.IllformedLocaleException;
-import java.util.List;
 import java.util.ArrayList;
-
-import static java.nio.file.Files.delete;
+import java.util.List;
 
 public class InventoryManagerService {
     private StockHistoryRepository historyRepo;
@@ -18,7 +13,6 @@ public class InventoryManagerService {
     public InventoryManagerService(StockItemRepository stockRepo, StockHistoryRepository historyRepo) {
         this.stockRepo = stockRepo;
         this.historyRepo = historyRepo;
-
     }
 
     public StockItem addStockItem(StockItem item) {
@@ -39,7 +33,7 @@ public class InventoryManagerService {
 
     public boolean deleteStockItem(int id) {
         if(id <= 0){
-            throw new IllegalArgumentException("ID cannot be null");
+            throw new IllegalArgumentException("ID must be greater than zero");
         }
         StockItem item = stockRepo.findById(id);
         if(item == null){
@@ -51,13 +45,13 @@ public class InventoryManagerService {
                 return true;
     }
 
-    public List<StockItem> getAllstockItems(){
+    public List<StockItem> getAllStockItems(){
           return stockRepo.findAll();
     }
 
     public StockItem updateStockItem(int id, StockItem updatedItem){
        if(id <= 0){
-            throw new IllformedLocaleException(("id cannot be less than zero"));
+            throw new IllegalArgumentException(("id cannot be less than zero"));
        }
 
        if(updatedItem == null){
@@ -67,23 +61,34 @@ public class InventoryManagerService {
         if(existingItem == null){
             return null;
         }
-        StockItem newItem = new StockItem(
-                existingItem.getId();
-                existingItem.getName();
-                existingItem.getQuantity();
-                existingItem.getPrice();
-                                         );
-        stockRepo.save(newItem);
-        StockHistory history = new StockHistory(newItem, "UPDATED");
-        historyRepo.save(history);
-        return newItem;
+        updatedItem.setId(existingItem.getId());
+        stockRepo.save(updatedItem);
+        historyRepo.save(new StockHistory(updatedItem, "UPDATED"));
+        return updatedItem;
+    }
+
+    public List<StockItem> findLowStockItems() {
+        List<StockItem> lowStockItems = new ArrayList<>();
+        List<StockItem> allStockItems = stockRepo.findAll();
+        for (StockItem item : allStockItems) {
+            if (item.isLowStock()) {
+                lowStockItems.add(item);
+            };
+        }
+        return lowStockItems;
     }
 // Stock History part below :
     public void logStockHistory(StockHistory history){
-
+         if(history == null){
+             throw new IllegalArgumentException("Stock history cannot be empty");
+         }
+         historyRepo.save(history);
     }
 
     public List<StockHistory> viewStockHistory(int itemId){
-        return null;
+            if(itemId <= 0){
+                throw new IllegalArgumentException("Item Id must be greater than 0");
+            }
+        return historyRepo.findByItemId(itemId);
     }
 }

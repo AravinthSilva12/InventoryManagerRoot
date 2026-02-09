@@ -18,6 +18,18 @@ public class StockItem {
         this.lowStockThreshold = lowStockThreshold;
         this.lastUpdated = lastUpdated;
     }
+
+    public StockItem(int id, String name, int quantity, double price) {
+                         this.id = id;
+                         this.name = name;
+                         this.quantity = quantity;
+                         this.price = price;
+    }
+
+    public StockItem(int i, String pen, int i1, int i2, long l) {
+
+    }
+
     // -------------------------
     // id methods :
     public int getId(){
