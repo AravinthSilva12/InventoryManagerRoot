@@ -1,6 +1,5 @@
 package com.aravinth.inventorymanager.demo;
 import com.aravinth.inventorymanager.model.StockItem;
-import com.aravinth.inventorymanager.model.StockHistory;
 import com.aravinth.inventorymanager.repository.inmemory.InMemoryStockItemRepository;
 import com.aravinth.inventorymanager.repository.inmemory.InMemoryStockHistoryRepository;
 import com.aravinth.inventorymanager.service.InventoryManagerService;
