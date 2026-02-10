@@ -26,9 +26,29 @@ public class StockItem {
                          this.price = price;
     }
 
-    public StockItem(int i, String pen, int i1, int i2, long l) {
+    public StockItem(int id, String name, int quantity, int lowStockThreshold, long lastUpdated) {
+    this.id = id;
+    this.name = name;
+    this.quantity = quantity;
+    this.lowStockThreshold = lowStockThreshold;
+    this.lastUpdated = lastUpdated;
+}
 
-    }
+    // Primary constructor with all fields
+public StockItem(int id, String name, double price, int quantity, 
+                 int lowStockThreshold, long lastUpdated) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.quantity = quantity;
+    this.lowStockThreshold = lowStockThreshold;
+    this.lastUpdated = lastUpdated;
+}
+
+// Convenience constructor with sensible defaults
+public StockItem(int id, String name, double price, int quantity) {
+    this(id, name, price, quantity, 0, System.currentTimeMillis());
+}
 
     // -------------------------
     // id methods :
