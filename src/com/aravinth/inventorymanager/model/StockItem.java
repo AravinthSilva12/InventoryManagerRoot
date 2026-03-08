@@ -9,6 +9,10 @@ public class StockItem {
     private int lowStockThreshold;
     private long lastUpdated;
     // -------------------------
+    // Empty constructor :
+    public StockItem(){
+
+    }
     // constructor :
     public StockItem(int id, String name, double price, int quantity, int lowStockThreshold, long lastUpdated){
         this.id = id;
@@ -18,7 +22,6 @@ public class StockItem {
         this.lowStockThreshold = lowStockThreshold;
         this.lastUpdated = lastUpdated;
     }
-
     // id methods :
     public int getId(){
       return id;
@@ -58,7 +61,9 @@ public class StockItem {
     public long getLastUpdated(){
        return lastUpdated;
     }
-
+    // -------------------------
+    public void updateTimeStamp(){ lastUpdated = System.currentTimeMillis(); }
+    // -------------------------
     public void setLastUpdated(long lastUpdated){
        this.lastUpdated = lastUpdated;
     }

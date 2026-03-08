@@ -1,6 +1,5 @@
 package com.aravinth.inventorymanager.repository;
 import com.aravinth.inventorymanager.model.StockHistory;
-import com.aravinth.inventorymanager.model.StockItem;
 
 import java.util.List;
 public interface StockHistoryRepository {

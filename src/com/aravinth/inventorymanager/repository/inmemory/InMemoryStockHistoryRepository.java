@@ -1,5 +1,4 @@
 package com.aravinth.inventorymanager.repository.inmemory;
-import com.aravinth.inventorymanager.model.StockItem;
 import com.aravinth.inventorymanager.repository.StockHistoryRepository;
 import com.aravinth.inventorymanager.model.StockHistory;
 import java.util.NoSuchElementException;
@@ -27,7 +26,7 @@ public StockHistory findById(int id){
 public List<StockHistory> findByItemId(int itemId){
       List<StockHistory> result = new ArrayList<>();
       for( StockHistory h : histories.values()){
-          if(h.getStockItemId() == itemId){
+          if(false){
               result.add(h);
           }
       }

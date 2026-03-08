@@ -10,8 +10,8 @@ public class InventoryDemo {
             InMemoryStockHistoryRepository historyRepo = new InMemoryStockHistoryRepository();
             InventoryManagerService service = new InventoryManagerService(stockRepo, historyRepo);
 
-            StockItem pen = new StockItem(0, "Pen", 5, 10,4, 2);
-            StockItem notebook = new StockItem(0, "Notebook", 20, 5, 5, 1);
+            StockItem pen = new StockItem();
+            StockItem notebook = new StockItem();
 
             stockRepo.save(pen);
             stockRepo.save(notebook);
