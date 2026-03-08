@@ -46,8 +46,6 @@ import java.util.Scanner;
                          StockItem itemEntry = new StockItem(id, itemName, priceOfItem, quantityOfItem, lowStockThresholdOfItem, lastUpdatedItem);
                          serviceObj.addStockItem(itemEntry);
                          System.out.println("your item added successfully!");
-                         StockHistory history = new StockHistory(itemEntry, "Item added");
-                         System.out.println(history);
                         }
                         break;
                         case "B":{
@@ -99,11 +97,12 @@ import java.util.Scanner;
                         }
                         break;
                         case "G":{
-                            System.out.println("View history under work!");
                             System.out.println("Enter the item Id to view its history");
                             int itemId = sc.nextInt();
                             sc.nextLine();
-                            for(StockHistory history : serviceObj.viewStockHistory(itemId));
+                            for(StockHistory history : serviceObj.viewStockHistory(itemId)){
+                                System.out.println(history);
+                            };
                         }
                         break;
                         case "H":{
