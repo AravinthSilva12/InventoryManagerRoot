@@ -102,6 +102,7 @@ import java.util.Scanner;
                             sc.nextLine();
                             for(StockHistory history : serviceObj.viewStockHistory(itemId)){
                                 System.out.println(history);
+                                System.out.println("Under work!");
                             };
                         }
                         break;
