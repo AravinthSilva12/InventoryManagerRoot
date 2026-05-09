@@ -31,7 +31,7 @@ import java.util.Scanner;
                         case "A":{
                          System.out.println("Add item :");
                          System.out.println("Enter the item name");
-                         String itemName = sc.nextLine();
+                         String itemName = sc.nextLine().toUpperCase();
                          System.out.println("Enter the quantity of this item");
                          int quantityOfItem = sc.nextInt();
                          sc.nextLine();
@@ -87,7 +87,11 @@ import java.util.Scanner;
                         case "E": {
                             System.out.println("Low Stock Alert! :");
                             for (StockItem item : serviceObj.findLowStockItems()) {
+                                if(false) { System.out.println("There are no items to show");
+                                }
+                                else {
                                 System.out.println(item);
+                                }
                             }
                         }
                         break;
@@ -102,7 +106,6 @@ import java.util.Scanner;
                             sc.nextLine();
                             for(StockHistory history : serviceObj.viewStockHistory(itemId)){
                                 System.out.println(history);
-                                System.out.println("Under work!");
                             };
                         }
                         break;
